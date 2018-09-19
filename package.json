@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
   "dependencies": {
+    "babel-cli": "^6.26.0",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.18.3",
     "connect-multiparty": "^2.2.0",
