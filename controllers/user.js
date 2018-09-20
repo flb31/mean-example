@@ -103,6 +103,24 @@ function login(req, res) {
     })
 }
 
+function update(req, res) {
+    var userId = req.params.id
+    var user = req.body
+
+    User.findByIdAndUpdate(userId, user, (err, userUpdated) => {
+        if(err || !userUpdated) {
+            return res.status(500).send({
+                message: 'Error updating User'
+            })
+        }
+
+        res.status(200).send({
+            message: 'User updated',
+            user: userUpdated
+        })
+    });
+}
+
 function test(req, res) {
     return res.send({
         message: 'User is logged'
@@ -113,5 +131,6 @@ module.exports = {
     index,
     save,
     login,
-    test
+    test,
+    update
 }
