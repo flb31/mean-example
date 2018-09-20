@@ -58,9 +58,58 @@ function save(req, res) {
             res.status(201).send({ user: userStored })
         })
     })
-} 
+}
+
+function login(req, res) {
+    var params = req.body
+
+    var email = params.email
+    var password = params.password
+
+
+    if(!email || !password) {
+        res.status(400).send({
+            message: 'Email or password is not valid.'
+        })
+        return
+    }
+
+    User.findOne({
+        email: email.toLowerCase()
+    }, (err, user) => {
+        if(err) {
+            res.status(500).send({
+                message: 'Error login'
+            })
+            return
+        }
+
+        if(!user) {
+            res.status(404).send({
+                message: 'User not found'
+            })
+            return
+        }
+
+        bcrypt.compare(password, user.password, (err, check) => {
+            if(check) {
+
+                if(params.gethash) {
+                    // JWT token
+                } else {
+                    res.status(200).send({user})
+                }
+            } else {
+                res.status(404).send({
+                    message: 'User not login'
+                })
+            }
+        })
+    })
+}
 
 module.exports = {
     index,
-    save
+    save,
+    login
 }
