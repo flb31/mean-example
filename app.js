@@ -10,10 +10,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 // routes
-app.get('/', function(req, res){
-    res.send({
-        message: 'Hello'
-    });
-})
+var userRoutes = require('./routes/user');
+app.use('/api', userRoutes)
 
 module.exports = app
