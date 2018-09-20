@@ -1,9 +1,12 @@
 'use strict'
 
-var express = require('express');
-var UserController = require('../controllers/user');
-var api = express.Router();
+var express = require('express')
+var UserController = require('../controllers/user')
+var app = express()
+var router = express.Router()
 
-api.get('/test', UserController.test)
+router.get('/', UserController.index)
+router.post('/', UserController.save)
+app.use('/users', router)
 
-module.exports = api
+module.exports = app
