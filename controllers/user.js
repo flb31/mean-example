@@ -2,6 +2,7 @@
 
 var User = require('../models/user')
 var bcrypt = require('bcrypt-nodejs')
+var jwt = require('../services/jwt')
 
 function index(req, res) {
     res.status(200).send({
@@ -21,23 +22,19 @@ function save(req, res) {
     user.image = null
 
     if(!params.password) {
-        res.status(400).send({message: 'Password is required'})
-        return
+        return res.status(400).send({message: 'Password is required'})
     }
 
     if(!user.name) {
-        res.status(400).send({message: 'Name is required'})
-        return
+        return res.status(400).send({message: 'Name is required'})
     }
 
     if(!user.surname) {
-        res.status(400).send({message: 'Surname is required'})
-        return
+        return res.status(400).send({message: 'Surname is required'})
     }
 
     if(!user.email) {
-        res.status(400).send({message: 'Email is required'})
-        return
+        return res.status(400).send({message: 'Email is required'})
     }
 
     // encrypt
@@ -46,13 +43,11 @@ function save(req, res) {
 
         user.save( (err, userStored) => {
             if(err) {
-                res.status(500).send({message: 'Error save user'})
-                return
+                return res.status(500).send({message: 'Error save user'})
             }
 
             if(!userStored) {
-                res.status(404).send({message: 'User not found'})
-                return
+                return res.status(404).send({message: 'User not found'})
             }
 
             res.status(201).send({ user: userStored })
@@ -68,27 +63,24 @@ function login(req, res) {
 
 
     if(!email || !password) {
-        res.status(400).send({
+        return res.status(400).send({
             message: 'Email or password is not valid.'
         })
-        return
     }
 
     User.findOne({
         email: email.toLowerCase()
     }, (err, user) => {
         if(err) {
-            res.status(500).send({
+            return res.status(500).send({
                 message: 'Error login'
             })
-            return
         }
 
         if(!user) {
-            res.status(404).send({
+            return res.status(404).send({
                 message: 'User not found'
             })
-            return
         }
 
         bcrypt.compare(password, user.password, (err, check) => {
@@ -96,6 +88,9 @@ function login(req, res) {
 
                 if(params.gethash) {
                     // JWT token
+                    res.status(200).send({
+                        token: jwt.createToken(user)
+                    })
                 } else {
                     res.status(200).send({user})
                 }
@@ -108,8 +103,15 @@ function login(req, res) {
     })
 }
 
+function test(req, res) {
+    return res.send({
+        message: 'User is logged'
+    })
+}
+
 module.exports = {
     index,
     save,
-    login
+    login,
+    test
 }
