@@ -13,6 +13,7 @@ router.post('/', UserController.save)
 router.post('/login', UserController.login)
 router.put('/:id', mdAuth.ensureAuth, UserController.update)
 router.post('/upload/:id', [mdAuth.ensureAuth, mdMultipart], UserController.upload)
+router.get('/image/:filename', UserController.showImage)
 router.post('/test', mdAuth.ensureAuth, UserController.test)
 app.use('/users', router)
 

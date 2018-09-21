@@ -3,6 +3,8 @@
 var User = require('../models/user')
 var bcrypt = require('bcrypt-nodejs')
 var jwt = require('../services/jwt')
+var fs = require('fs')
+var path = require('path')
 
 function index(req, res) {
     res.status(200).send({
@@ -150,6 +152,21 @@ function upload(req, res) {
     
 }
 
+function showImage(req, res) {
+    var filename = req.params.filename
+    var pathImage = './statics/uploads/users/' + filename
+
+    fs.exists(pathImage, function(exists) {
+        if(!exists) {
+            return res.status(404).send({
+                message: 'Image not found'
+            })
+        }
+
+        res.sendFile(path.resolve(pathImage))
+    })
+}
+
 function test(req, res) {
     return res.send({
         message: 'User is logged'
@@ -162,5 +179,6 @@ module.exports = {
     update,
     login,
     upload,
+    showImage,
     test,
 }
