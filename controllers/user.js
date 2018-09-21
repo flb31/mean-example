@@ -118,7 +118,36 @@ function update(req, res) {
             message: 'User updated',
             user: userUpdated
         })
-    });
+    })
+}
+
+
+function upload(req, res) {
+    var userId = req.params.id
+    var filename = 'undefined-filename'
+
+    if(!req.files || !req.files.image) {
+        return res.status(404).send({
+            message: 'File not found'
+        })
+    }
+
+    var filePath = req.files.image.path
+    filename = filePath.split('/')[3]
+
+    User.findByIdAndUpdate(userId, {image: filename}, (err, userUpdated) => {
+        if(err || !userUpdated) {
+            return res.status(500).send({
+                message: 'Error upload image User'
+            })
+        }
+
+        res.status(200).send({
+            message: 'Update image ',
+            user: userUpdated
+        })
+    })
+    
 }
 
 function test(req, res) {
@@ -130,7 +159,8 @@ function test(req, res) {
 module.exports = {
     index,
     save,
+    update,
     login,
+    upload,
     test,
-    update
 }
