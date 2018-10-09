@@ -178,7 +178,7 @@ function upload(req, res) {
 
         res.status(200).send({
             message: 'Album image ',
-            artist: albumUpdated
+            album: albumUpdated
         })
     })
     
