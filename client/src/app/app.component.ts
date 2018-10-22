@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import User from './models/user';
 import { UserService } from './services/user.service';
+import { CommonService } from './services/common.service';
 import { MzToastService, MzButtonModule, MzInputModule, MzValidationModule, MzInputContainerComponent } from 'ngx-materialize';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
@@ -10,6 +11,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./app.component.css'],
   providers: [
     UserService,
+    CommonService,
     MzToastService,
     MzInputModule,
     MzButtonModule,
@@ -26,12 +28,15 @@ export class AppComponent implements OnInit {
 
   constructor(
     private _userService: UserService,
+    private _commonService: CommonService,
     private _toastService: MzToastService
   ) {
     this.user = new User('', '', '', '', '', 'ROLE_USER', '');
   }
 
   ngOnInit() {
+    this.identity = this._commonService.getLocal('user.identity');
+    this.token = this._commonService.getLocal('user.token');
   }
 
   public onSignIn() {
@@ -46,7 +51,7 @@ export class AppComponent implements OnInit {
           const identity = body.user;
           this.identity = identity;
 
-          if(this.token.length > 0)  {
+          if(this.identity)  {
             this._userService.signIn(this.user, true).subscribe(
 
               response => {
@@ -57,6 +62,11 @@ export class AppComponent implements OnInit {
                 this.token = body.token;
                 
                 this._toastService.show('Welcome', 4000, 'green');
+
+                // Set memory
+                this._commonService.setLocal('user.identity', this.identity);
+                this._commonService.setLocal('user.token', this.token);
+                
               }
             );
           } else {
