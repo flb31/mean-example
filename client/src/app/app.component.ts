@@ -36,24 +36,27 @@ export class AppComponent implements OnInit {
 
   public onSignIn() {
 
-    this._userService.signIn(this.user, true).subscribe( 
+    this._userService.signIn(this.user).subscribe( 
       
       
       response => {
+
           const res = <any>response;
           const body = JSON.parse(<any>res._body);
-          
-          this.token = body.token;
+          const identity = body.user;
+          this.identity = identity;
 
           if(this.token.length > 0)  {
-            this._toastService.show('Welcome', 4000, 'green');
             this._userService.signIn(this.user, true).subscribe(
 
               response => {
+
                 const res = <any>response;
                 const body = JSON.parse(<any>res._body);
-                const identity = body.user;
-                this.identity = identity;
+          
+                this.token = body.token;
+                
+                this._toastService.show('Welcome', 4000, 'green');
               }
             );
           } else {
