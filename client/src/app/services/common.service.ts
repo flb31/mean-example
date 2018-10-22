@@ -14,4 +14,8 @@ export class CommonService {
     removeLocal(type) {
         localStorage.removeItem(type);
     }
+
+    clearAll() {
+        localStorage.clear();
+    }
 }

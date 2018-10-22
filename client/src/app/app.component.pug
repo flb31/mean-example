@@ -1,7 +1,35 @@
-nav('*ngIf'="identity")
+mz-navbar('*ngIf'="identity")
   .nav-wrapper
-    a.brand-logo
+    a.brand-logo(href="#")
         | {{title}}
+    mz-navbar-item-container
+        mz-navbar-item(class="right")
+            a(id="btn-dropdown-demo" href="#")
+                | {{ identity.name }}
+
+            mz-dropdown(
+                '[id]'="'userdropdown'"
+                '[align]'="'bottom'"
+                '[belowOrigin]'="true"
+                '[dropdownButtonId]'="'btn-dropdown-demo'"
+                '[stopPropagation]'="true"
+                '[constrainWidth]'="false"
+            )
+                mz-dropdown-item
+                    a(href="#!")
+                        | My Account
+                mz-dropdown-item
+                    a(href="#!")
+                        | Settings
+                mz-dropdown-divider
+                mz-dropdown-item
+                    a(
+                        href="#!"
+                        '(click)'="onLogout()"
+                    )
+                        | Log Out
+
+
 
 div('*ngIf'="identity")
   p
@@ -17,35 +45,34 @@ div('*ngIf'="identity")
             '(ngSubmit)'="onSignIn()"
         )
 
-            .input-field.col.s12
-                div(mz-input-container)
-                    input( 
-                        'mz-input'
-                        'mz-validation'
-                        'required'
-                        '#email'="ngModel"
-                        'name'="email"
-                        '[(ngModel)]'="user.email"
-                        'placeholder'="Email"
-                        'type'="text"
-                        'validate'="true"
-                        'dataError'="Error Message"
-                    )
+            mz-input-container
+                input( 
+                    'mz-input'
+                    'label'="Email"
+                    'required'
+                    'type'="email"
+                    'validate'="true"
+                    'dataError'="Email is not valid."
+                    '#email'="ngModel"
+                    'name'="email"
+                    '[(ngModel)]'="user.email"
+                )
 
-            .input-field.col.s12
+            mz-input-container
                 input(
-                    required
+                    'mz-input'
+                    'label'="Password"
+                    'required'
+                    'type'="password"
+                    'validate'="true"
+                    'dataError'="Password is not valid."
                     '#password'="ngModel"
                     'name'="password"
                     '[(ngModel)]'="user.password"
-                    'placeholder'="Password"
-                    'type'="password"
-                    'class'="validate"
                 )
 
             button(
                 mz-button
-                class="waves-effect waves-light btn"
             )
                 | Sign In
 
@@ -55,40 +82,46 @@ div('*ngIf'="identity")
 
         form.col.s12
             .input-field.col.s12
-                input(
+                input( 
+                    'mz-input'
+                    'label'="Name"
                     'required'
-                    'placeholder'="Name"
                     'type'="text"
-                    'class'="validate"
-                )
-        
-
-            .input-field.col.s12
-                input(
-                    'required'
-                    'placeholder'="Surname"
-                    'type'="text"
-                    'class'="validate"
+                    'validate'="true"
+                    'dataError'="Name is not valid."
                 )
 
             .input-field.col.s12
-                input(
+                input( 
+                    'mz-input'
+                    'label'="Surname"
                     'required'
-                    'placeholder'="Email"
+                    'type'="text"
+                    'validate'="true"
+                    'dataError'="Surname is not valid."
+                )
+
+            .input-field.col.s12
+                input( 
+                    'mz-input'
+                    'label'="Email"
+                    'required'
                     'type'="email"
-                    'class'="validate"
+                    'validate'="true"
+                    'dataError'="Email is not valid."
                 )
 
             .input-field.col.s12
                 input(
+                    'mz-input'
+                    'label'="Password"
                     'required'
-                    'placeholder'="Password"
                     'type'="password"
-                    'class'="validate"
+                    'validate'="true"
+                    'dataError'="Password is not valid."
                 )
 
             button(
                 mz-button
-                class="waves-effect waves-light btn"
             )
                 | Sign Up

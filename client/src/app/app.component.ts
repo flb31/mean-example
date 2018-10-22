@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import User from './models/user';
 import { UserService } from './services/user.service';
 import { CommonService } from './services/common.service';
-import { MzToastService, MzButtonModule, MzInputModule, MzValidationModule, MzInputContainerComponent } from 'ngx-materialize';
+import { MzToastService } from 'ngx-materialize';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
@@ -12,11 +12,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   providers: [
     UserService,
     CommonService,
-    MzToastService,
-    MzInputModule,
-    MzButtonModule,
-    MzValidationModule,
-    MzInputContainerComponent
+    MzToastService
   ]
 })
 
@@ -84,6 +80,11 @@ export class AppComponent implements OnInit {
       }
     
     );
+  }
+
+  public onLogout() {
+    this._commonService.clearAll();
+    this.identity = false;
   }
 
   public onSubmit() {
