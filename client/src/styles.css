@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+input:not([type]).invalid ~ .helper-text, input:not([type]):focus.invalid ~ .helper-text, input[type=text]:not(.browser-default).invalid ~ .helper-text, input[type=text]:not(.browser-default):focus.invalid ~ .helper-text, input[type=password]:not(.browser-default).invalid ~ .helper-text, input[type=password]:not(.browser-default):focus.invalid ~ .helper-text, input[type=email]:not(.browser-default).invalid ~ .helper-text, input[type=email]:not(.browser-default):focus.invalid ~ .helper-text, input[type=url]:not(.browser-default).invalid ~ .helper-text, input[type=url]:not(.browser-default):focus.invalid ~ .helper-text, input[type=time]:not(.browser-default).invalid ~ .helper-text, input[type=time]:not(.browser-default):focus.invalid ~ .helper-text, input[type=date]:not(.browser-default).invalid ~ .helper-text, input[type=date]:not(.browser-default):focus.invalid ~ .helper-text, input[type=datetime]:not(.browser-default).invalid ~ .helper-text, input[type=datetime]:not(.browser-default):focus.invalid ~ .helper-text, input[type=datetime-local]:not(.browser-default).invalid ~ .helper-text, input[type=datetime-local]:not(.browser-default):focus.invalid ~ .helper-text, input[type=tel]:not(.browser-default).invalid ~ .helper-text, input[type=tel]:not(.browser-default):focus.invalid ~ .helper-text, input[type=number]:not(.browser-default).invalid ~ .helper-text, input[type=number]:not(.browser-default):focus.invalid ~ .helper-text, input[type=search]:not(.browser-default).invalid ~ .helper-text, input[type=search]:not(.browser-default):focus.invalid ~ .helper-text, textarea.materialize-textarea.invalid ~ .helper-text, textarea.materialize-textarea:focus.invalid ~ .helper-text, .select-wrapper.invalid ~ .helper-text {
+    color: #F44336;
+    font-size: 12px;
+}
+
+
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+    margin-bottom: 0 !important;
+}
+
+.input-field {
+    margin-bottom: 1rem;
+}

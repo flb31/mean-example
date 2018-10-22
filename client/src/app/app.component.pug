@@ -1,0 +1,94 @@
+nav('*ngIf'="identity")
+  .nav-wrapper
+    a.brand-logo
+        | {{title}}
+
+div('*ngIf'="identity")
+  p
+    | Logged
+
+
+.row('*ngIf'="!identity")
+    .col.s6
+        h5
+            | Sign In
+        form.col.s12(
+            '#loginForm'="ngForm"
+            '(ngSubmit)'="onSignIn()"
+        )
+
+            .input-field.col.s12
+                div(mz-input-container)
+                    input( 
+                        'mz-input'
+                        'mz-validation'
+                        'required'
+                        '#email'="ngModel"
+                        'name'="email"
+                        '[(ngModel)]'="user.email"
+                        'placeholder'="Email"
+                        'type'="text"
+                        'validate'="true"
+                        'dataError'="Error Message"
+                    )
+
+            .input-field.col.s12
+                input(
+                    required
+                    '#password'="ngModel"
+                    'name'="password"
+                    '[(ngModel)]'="user.password"
+                    'placeholder'="Password"
+                    'type'="password"
+                    'class'="validate"
+                )
+
+            button(
+                mz-button
+                class="waves-effect waves-light btn"
+            )
+                | Sign In
+
+    .col.s6
+        h5
+            | Sign Up
+
+        form.col.s12
+            .input-field.col.s12
+                input(
+                    'required'
+                    'placeholder'="Name"
+                    'type'="text"
+                    'class'="validate"
+                )
+        
+
+            .input-field.col.s12
+                input(
+                    'required'
+                    'placeholder'="Surname"
+                    'type'="text"
+                    'class'="validate"
+                )
+
+            .input-field.col.s12
+                input(
+                    'required'
+                    'placeholder'="Email"
+                    'type'="email"
+                    'class'="validate"
+                )
+
+            .input-field.col.s12
+                input(
+                    'required'
+                    'placeholder'="Password"
+                    'type'="password"
+                    'class'="validate"
+                )
+
+            button(
+                mz-button
+                class="waves-effect waves-light btn"
+            )
+                | Sign Up
