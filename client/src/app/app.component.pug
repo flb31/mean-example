@@ -80,7 +80,10 @@ div('*ngIf'="identity")
         h5
             | Sign Up
 
-        form.col.s12
+        form.col.s12(
+            '#loginForm'="ngForm"
+            '(ngSubmit)'="onSignUp()"
+        )
             .input-field.col.s12
                 input( 
                     'mz-input'
@@ -89,6 +92,8 @@ div('*ngIf'="identity")
                     'type'="text"
                     'validate'="true"
                     'dataError'="Name is not valid."
+                    'name'="name"
+                    '[(ngModel)]'="userSignUp.name"
                 )
 
             .input-field.col.s12
@@ -99,6 +104,8 @@ div('*ngIf'="identity")
                     'type'="text"
                     'validate'="true"
                     'dataError'="Surname is not valid."
+                    'name'="surname"
+                    '[(ngModel)]'="userSignUp.surname"
                 )
 
             .input-field.col.s12
@@ -109,6 +116,8 @@ div('*ngIf'="identity")
                     'type'="email"
                     'validate'="true"
                     'dataError'="Email is not valid."
+                    'name'="email"
+                    '[(ngModel)]'="userSignUp.email"
                 )
 
             .input-field.col.s12
@@ -119,6 +128,8 @@ div('*ngIf'="identity")
                     'type'="password"
                     'validate'="true"
                     'dataError'="Password is not valid."
+                    'name'="password"
+                    '[(ngModel)]'="userSignUp.password"
                 )
 
             button(

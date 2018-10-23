@@ -6,10 +6,15 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class UserService {
-    public url: string;
+    private url: string;
+    private headers: Headers;
 
     constructor(private _http: Http) {
         this.url = environment.api_url + '/users';
+
+        this.headers = new Headers({
+            'Content-Type': 'application/json'
+        });
     }
     
     signIn(user, hash = false) {
@@ -18,17 +23,14 @@ export class UserService {
             user.gethash = true;
         }
 
-        const json = JSON.stringify(user);
-        const params = json;
+        const params = JSON.stringify(user);
 
-        const headers = new Headers({
-            'Content-Type': 'application/json'
-        });
-
-        return this._http.post(`${this.url}/login`, params, {headers: headers});
+        return this._http.post(`${this.url}/login`, params, {headers: this.headers});
     }
 
-    signUp() {
-        return 'Sign Up';
+    signUp(user) {
+        const params = JSON.stringify(user);
+
+        return this._http.post(`${this.url}`, params, {headers: this.headers});
     }
 }
