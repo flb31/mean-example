@@ -7,7 +7,7 @@
             '#loginForm'="ngForm"
             '(ngSubmit)'="onSignUp()"
         )
-            .input-field.col.s12
+            mz-input-container
                 input( 
                     'mz-input'
                     'label'="Name"
@@ -19,7 +19,7 @@
                     '[(ngModel)]'="userSignUp.name"
                 )
 
-            .input-field.col.s12
+            mz-input-container
                 input( 
                     'mz-input'
                     'label'="Surname"
@@ -31,7 +31,7 @@
                     '[(ngModel)]'="userSignUp.surname"
                 )
 
-            .input-field.col.s12
+            mz-input-container
                 input( 
                     'mz-input'
                     'label'="Email"
@@ -43,7 +43,7 @@
                     '[(ngModel)]'="userSignUp.email"
                 )
 
-            .input-field.col.s12
+            mz-input-container
                 input(
                     'mz-input'
                     'label'="Password"
