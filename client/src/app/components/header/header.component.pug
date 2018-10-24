@@ -1,0 +1,30 @@
+mz-navbar('*ngIf'="identity")
+  .nav-wrapper
+    a.brand-logo(href="#")
+        | {{title}}
+    mz-navbar-item-container
+        mz-navbar-item(class="right")
+            a(id="btn-dropdown-demo" href="#")
+                | {{ identity.name }}
+
+            mz-dropdown(
+                '[id]'="'userdropdown'"
+                '[align]'="'bottom'"
+                '[belowOrigin]'="true"
+                '[dropdownButtonId]'="'btn-dropdown-demo'"
+                '[stopPropagation]'="true"
+                '[constrainWidth]'="false"
+            )
+                mz-dropdown-item
+                    a('[routerLink]'="['/my-account']")
+                        | My Account
+                mz-dropdown-item
+                    a('[routerLink]'="['/setting']")
+                        | Settings
+                mz-dropdown-divider
+                mz-dropdown-item
+                    a(
+                        '[routerLink]'="['/']"
+                        '(click)'="onLogout()"
+                    )
+                        | Log Out
