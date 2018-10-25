@@ -1,2 +1,50 @@
-app-header(title="Player")
-h3 my account
+app-header(title="My Account")
+br
+.row
+    .col.s4 &nbsp;
+    form.col.s4(
+        '#updateForm'="ngForm"
+        '(ngSubmit)'="onUpdate()"
+    )
+        mz-input-container
+            input( 
+                'mz-input'
+                'label'="Name"
+                'required'
+                'type'="text"
+                'validate'="true"
+                'dataError'="Name is not valid."
+                'name'="name"
+                '[(ngModel)]'="user.name"
+            )
+
+        mz-input-container
+            input( 
+                'mz-input'
+                'label'="Surname"
+                'required'
+                'type'="text"
+                'validate'="true"
+                'dataError'="Surname is not valid."
+                'name'="surname"
+                '[(ngModel)]'="user.surname"
+            )
+
+        mz-input-container
+            input( 
+                'mz-input'
+                'label'="Email"
+                'required'
+                'type'="email"
+                'validate'="true"
+                'dataError'="Email is not valid."
+                'name'="email"
+                '[(ngModel)]'="user.email"
+            )
+
+        button(
+            mz-button
+        )
+            | Update
+
+    .col.s4 &nbsp;

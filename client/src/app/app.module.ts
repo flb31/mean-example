@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { StoreModule } from '@ngrx/store';
 import {
   MzButtonModule,
   MzInputModule,
@@ -13,8 +14,8 @@ import {
 
 // Router
 import { APP_ROUTES } from './router/app.router';
-import { AuthGuardService as AuthGuard } from "./auth/auth.guard.service";
-import { CommonService } from "./services/common.service";
+import { AuthGuardService as AuthGuard } from './auth/auth.guard.service';
+import { reducer as userReducer } from './reducers/user.reducer';
 
 // Custom component
 import { AppComponent } from './app.component';
@@ -40,6 +41,7 @@ import { PlayerComponent } from './components/player/player.component';
     FormsModule,
     HttpModule,
     RouterModule.forRoot(APP_ROUTES),
+    StoreModule.forRoot({user:userReducer}),
     
     // Materialize
     MzInputModule,
