@@ -46,6 +46,6 @@ export class UserService {
     update(user) {
         const params = JSON.stringify(user);
 
-        return this._http.put(`${this.url}/`, params, {headers: this.headersToken});
+        return this._http.put(`${this.url}/${user._id}`, params, {headers: this.headersToken});
     }
 }

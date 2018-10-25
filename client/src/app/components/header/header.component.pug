@@ -1,11 +1,11 @@
-mz-navbar('*ngIf'="identity")
+mz-navbar('*ngIf'="user | async as u")
   .nav-wrapper
     a.brand-logo(href="#")
         | {{title}}
     mz-navbar-item-container
         mz-navbar-item(class="right")
             a(id="btn-dropdown-demo" href="#")
-                | {{ identity.name }}
+                | {{ u.name }}
 
             mz-dropdown(
                 '[id]'="'userdropdown'"
